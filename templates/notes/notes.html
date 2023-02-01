@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>My TODO list</h1>
+    <br />
+    <table class=".table">
+        <tr>
+            <th>Note</th>
+            <th>Options</th>
+        </tr>
+
+        {% for n in notes %}
+        <tr>
+            <td><p class="lead">{{n.text_content}}</p></td>
+
+            <td class="btn-group">
+                <a href="/notes/delete/{{ n.pk }}">
+                    <button class="btn btn-primary">Delete</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+
+        <tr>
+            <form method="POST" class="form-horizontal">
+                {% csrf_token %}
+                <td>{{form.as_p}}</td>
+                <td><input type="submit" value="Add note" class="btn btn-primary"></td>
+            </form>
+        </tr>
+    </table>
+{% endblock %}
