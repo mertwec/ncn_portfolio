@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from notes.models import Note
+from notes.models import Note, SiteNote, Category
 from notes.forms import NoteForm
 
 
@@ -29,6 +29,46 @@ def notes(request):
         )
 
 
-def note_delete(request, note_id):
+def delete_note(request, note_id):
     Note.objects.get(pk=note_id).delete()
-    return redirect("/notes")
+    return redirect("/notes")   # redirect to url = url/notes
+
+#------------------------------------------------------------
+
+
+def sites_all(request):
+    sites = SiteNote.objects.all()
+    # categorys = Category.objects.all()
+
+    # import pdb; pdb.set_trace()
+
+    return render(
+        request,
+        template_name="notes/sites.html",
+        context={
+            "title": "Useful Links",
+            "sites": sites,
+            # "categories": categorys,
+        }
+    )
+
+def sites_by_category(request, category_name):
+    sites = SiteNote.get_by_category(category_name)
+    # categorys = Category.objects.all()
+    
+    
+    return render(
+        request,
+        template_name="notes/sites.html",
+        context={
+            "title": "Useful Links",
+            "sites": sites,
+            # "categories": categorys,
+        }
+    )
+
+
+def delete_site(request, site_id):
+    SiteNote.objects.get(pk=site_id).delete()
+    return redirect("/notes/sites/")   # redirect to url = url/notes
+    

@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, connection
 from datetime import datetime
 
 
@@ -19,22 +19,23 @@ class Category(models.Model):
     name = models.CharField(max_length=150)
     
     class Meta:
-        # verbose_name = "Category"
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
         db_table = "categories"
-        ordering = "name",
+        ordering = ["name",]
 
     def __str__(self):
-        return f"category: {self.name}"
+        return f"{self.name}"
 
 
 class SiteNote(models.Model):
     title = models.CharField(max_length=150)
     url = models.URLField(unique=True, null=False)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     category = models.ForeignKey(
         Category, 
         on_delete=models.CASCADE, 
-        related_name="sites"
+        related_name="sites",
         )
 
     class Meta:
@@ -44,3 +45,22 @@ class SiteNote(models.Model):
 
     def __str__(self):
         return f"{self.title}: {self.url}"
+
+    @classmethod
+    def get_by_category(cls, category_name):
+        query = """
+            SELECT 
+                sn.id as id, 
+                sn.title as title, 
+                sn.url as url
+            FROM sites_notes as sn
+            JOIN categories c 
+            ON sn.category_id = c.id
+            WHERE c.name = %s
+            ORDER BY sn.title
+        """
+        with connection.cursor() as cursor:
+            cursor.execute(query, [category_name])
+            rows = cursor.fetchall() 
+        return [{'id':row[0], 'title':row[1], 'url':row[2]} for row in rows]
+        

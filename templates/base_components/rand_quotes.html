@@ -1,0 +1,14 @@
+
+{% if random_quote %}
+    <div class=main>
+        <div class=left></div>
+        <div class=right>
+            <q> {{random_quote.0}} </q><br>
+            <cite> {{random_quote.1}} </cite>
+        </div>
+    </div>
+{% else %}
+    <p align="right">
+        Well, and what you want?
+    </p>
+{% endif %}

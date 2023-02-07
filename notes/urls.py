@@ -1,8 +1,10 @@
 from django.urls import path
-from notes.views import notes, note_delete
+from notes.views import notes, delete_note, sites_all, sites_by_category, delete_site
 
 urlpatterns = [
     path('', notes),
-    # path("add/", note_add),
-    path("delete/<int:note_id>", note_delete)
+    path("delete/<int:note_id>", delete_note),
+    path("sites/", sites_all), 
+    path("sites/<str:category_name>", sites_by_category, name="site_category"),
+    path("sites/delete/<int:site_id>", delete_site)
     ]

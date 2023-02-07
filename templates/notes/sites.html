@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{title}}
+{% endblock%}
+
+{% block content %}
+<div>
+    <div>
+        <h3>
+            <a href="/notes/sites/">Categories</a> </h3>
+        <ul>
+            {% for cat in categories%}
+            <li>
+                <a href="{% url 'site_category' category_name=cat.name %}">{{ cat.name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        <h3>Links</h3>
+        <table>
+            {% for site in sites %}
+            <tr>
+                <td>{{site.title}}</td>
+                <td>
+                    <a href="{{site.url}}" target="_blank">{{site.url}}</a></td>
+                <td> <a href="/notes/sites/delete/{{ site.id }}">
+                        <button class="btn btn-primary">Delete</button>
+                    </a>
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

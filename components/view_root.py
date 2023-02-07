@@ -3,4 +3,5 @@ from django.http import HttpRequest, HttpResponse
 
 
 def main(request:HttpRequest):
-    return HttpResponse("about me -- mb cv")
+    return render(request, template_name="base.html")
+    
