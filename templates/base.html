@@ -1,4 +1,4 @@
-{#% load static %#}
+{% load static %}
 
 <!DOCTYPE html>
 
@@ -6,39 +6,71 @@
 
 <head>
     <meta charset="utf-8">
-    <title>{%block title%} NCN {% endblock %}</title>
+    <!-- for mobile-optimized  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <title>{%block title%} NCN {% endblock %}</title>
+    <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- my styles -->
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
 
-    <!-- <link href="static/style.css" rel="stylesheet" type="text/css">-->
-    <link href="/static/images/favicon.png" id="favicon" rel="icon" type="image/x-icon">
+    <link href="/static/images/favicon_io/favicon.ico" id="favicon" rel="icon" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/static/images/favicon_io/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+
 </head>
 
 <header>
-    <h1>Frankeinshtein</h1>
-    <div>logo</div>
-    <div>
+    <div class="header-wrapper rounded">
+        <!-- navigation -->
+        {% include "base_components/navigation.html" %}
+
+        <!-- quote -->
         {% include "base_components/rand_quotes.html" %}
     </div>
-    <nav>
-        {% include "base_components/navigation.html" %}
-    </nav>
     <hr>
 </header>
 
 <body>
+    <div class="main_wrapper rounded">
+        {% block content %}
+        <div class="container-fluid px-10">
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non ipsum eius blanditiis tempora quas ad esse
+                molestias nostrum fugit ex, voluptate temporibus error dignissimos ducimus incidunt qui nesciunt
+                corrupti dolorem.
+                Distinctio nemo optio deserunt tenetur, temporibus eaque, iste laboriosam cum doloribus quos corrupti
+                labore! Praesentium repudiandae temporibus a voluptate placeat maiores officiis rem, pariatur
+                dignissimos eveniet molestias, similique, aliquam architecto?
+                Provident eaque suscipit nihil ex maxime debitis possimus dicta saepe velit nemo dolore deserunt,
+                tempora sint. Animi praesentium doloribus maxime deserunt possimus assumenda a, modi nulla, aliquam qui
+                excepturi id!
+                Rem, velit deleniti. Tempora tempore ipsa voluptatibus reiciendis iure consequatur itaque ut voluptatum
+                odio expedita animi, et numquam maxime nam quas saepe quis repudiandae optio eligendi beatae quia
+                asperiores sequi!</p>
+        </div>
+        {% endblock %}
+    </div>
 
-    {% block content %}
-    <div> main content </div>
-    {% endblock %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+
 </body>
+<hr>
+<footer class="footer-wrapper rounded">
+    {% include "base_components/footer.html"%}
 
-<footer>
-    <br>
-    <hr>
-    my contacts (telega, email, github)
 </footer>
 
 </html>

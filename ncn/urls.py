@@ -16,12 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from components.view_root import main
+from components.view_root import main, resume
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("notes/", include("notes.urls")),
     # path("news/", include("news.urls")),
     # path("cribs/", include("cribs.urls")),
-    path("", main),
+    path("", resume),
 ]

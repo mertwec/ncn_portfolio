@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %} About Me {% endblock %}
+
+
+{% block content %}
+
+<div class="container-fluid row">
+  
+  <!-- sidebar -->
+  {% include "about_me/bit_sidebar.html" %}
+
+  <!-- main content -->
+  <div class="col">
+    <!-- about me -->
+    <div class="container">
+      <h3 class="fs-5 fw-bold text-start mt-3 p-3">Back-End Developer, Software Developer</h2>
+      <h1 class="fs-1 fw-bold text-center mt-3 p-3">Valentyn Oliinykov</h1>
+      <p class="about-me ">
+        Get a position Python back-end developer where I can apply my professional knowledge, apply past experience
+        and skills with opportunities for professional and career growth.
+      </p>
+    </div>
+
+    <!-- my projects -->
+    <div class="project-container">
+      <h3 class="main-titles">My Projects</h3>
+      <ol class="project-list">
+        <li class="project-item">
+          <a href="https://hellen.p.goit.global/" class="project-item-link">https://hellen.p.goit.global/</a>
+          <span class="project-item-descr">
+            .....................................[python3, html, css]
+          </span>
+
+        </li>
+        <li class="project-item">
+          <a href="https://cryptohub.p.goit.global/" class="project-item-link">https://cryptohub.p.goit.global/</a>
+          <span class="project-item-descr">
+            ....................[python3, html, css]
+          </span>
+        </li>
+        <li class="project-item">
+          <a href="https://kidslike.p.goit.global/" class="project-item-link">https://kidslike.p.goit.global/</a>
+          <span class="project-item-descr">
+            ..............................[python3, slq]
+          </span>
+        </li>
+      </ol>
+    </div>
+
+    <!-- work expiriens -->
+    <div class="work-experience-continer">
+      <h3 class="main-titles">Work Experience</h3>
+      <!-- company 0 -->
+      <div class="we-item">
+        <h4 class="we-position">Electronics Engineer
+          <a href="http://highvoltage.org.ua/" class="we-position-company">OOO "Torsion Plus"</a>
+        </h4>
+        <p class="work-period">2013-2022 | Ukraine</p>
+
+        <ul class="work-duties-list">
+          <li class="work-duties">Working with documentation</li>
+          <li class="work-duties">Assembly and development of printed circuit boards</li>
+          <li class="work-duties">Adjuster of electronic equipment</li>
+        </ul>
+      </div>
+      <!-- company 1 -->
+      <div class="we-item">
+        <h4 class="we-position">Software Developer (part time)
+          <a href="http://highvoltage.org.ua/" class="we-position-company">OOO "Torsion Plus"</a>
+        </h4>
+        <p class="work-period">2019-2022 | Ukraine</p>
+
+        <ul class="work-duties-list">
+          <li class="work-duties">
+            Analyzing the frequency response of a voltage source control
+            system
+          </li>
+          <li class="work-duties">
+            Voltage source control panel for welding in outer space.
+          </li>
+          <li class="work-duties">
+            Application for managing the picking of electronic components
+            in stock.
+          </li>
+        </ul>
+      </div>
+      <!-- company 2 -->
+      <div class="we-item">
+        <h4>Back-End Developer
+          <span class="we-position-company">Freelance</span>
+        </h4>
+        <p class="work-period"> 2022 | Ukraine</p>
+        <ul class="work-duties-list">
+          <li class="work-duties">targetads - система медийной аналитики</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <!-- education -->
+    <div class="education-container">
+      <h3 class="main-titles">Education</h3>
+
+      <div class="education-item">
+        <p class="education-company">Kharkiv National University of Radio Electronics</p>
+        <p class="education-special">Engineer of electronic devices and systems</p>
+        <p class="work-period">2008 – 2013</p>
+      </div>
+
+      <div class="education-item">
+        <p class="education-company">cource: ITEa</p>
+        <p class="education-special">Python advanced courses (Python3, Django)</p>
+        <p class="work-period">2019</p>
+      </div>
+
+      <div class="education-item">
+        <p class="education-company">cource: BeBrainee</p>
+        <p class="education-special">theory and practice (C, Python3)</p>
+        <p class="work-period">2022</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

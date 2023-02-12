@@ -37,11 +37,12 @@ class SiteNote(models.Model):
         on_delete=models.CASCADE, 
         related_name="sites",
         )
+    created_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         # verbose_name = "Ссылки"
         db_table = "sites_notes"
-        ordering = ["title", "url"]
+        ordering = ["created_at", "title", "url"]
 
     def __str__(self):
         return f"{self.title}: {self.url}"
@@ -52,9 +53,11 @@ class SiteNote(models.Model):
             SELECT 
                 sn.id as id, 
                 sn.title as title, 
-                sn.url as url
+                sn.url as url,
+                sn.description as description,
+                sn.created_at as created_at
             FROM sites_notes as sn
-            JOIN categories c 
+            JOIN categories as c 
             ON sn.category_id = c.id
             WHERE c.name = %s
             ORDER BY sn.title

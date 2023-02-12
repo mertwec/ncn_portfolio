@@ -25,7 +25,7 @@
                 <td>{{site.title}}</td>
                 <td>
                     <a href="{{site.url}}" target="_blank">{{site.url}}</a></td>
-                <td> <a href="/notes/sites/delete/{{ site.id }}">
+                <td> <a href="/admin/notes/sitenote/{{ site.id }}/change/">
                         <button class="btn btn-primary">Delete</button>
                     </a>
                 </td>
@@ -34,6 +34,10 @@
             {% endfor %}
 
         </table>
+        <span>
+            <a href="/admin/notes/sitenote/add/">add site</a>
+        </span>
+        
     </div>
 
 </div>

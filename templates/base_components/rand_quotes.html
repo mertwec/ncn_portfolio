@@ -1,14 +1,17 @@
-
-{% if random_quote %}
-    <div class=main>
-        <div class=left></div>
-        <div class=right>
-            <q> {{random_quote.0}} </q><br>
+<div class="container-fluid">
+    <div class="row gx-3 nav_position">
+        {% if random_quote %}
+        <div class="col mb-3"></div>
+        <div class="col-sm-8 mb-3 text-end">
+            <q> {{random_quote.0}} </q>
+            <br>
             <cite> {{random_quote.1}} </cite>
         </div>
+
+        {% else %}
+        <p class="text-end">
+            Well, and what you want?
+        </p>
+        {% endif %}
     </div>
-{% else %}
-    <p align="right">
-        Well, and what you want?
-    </p>
-{% endif %}
+</div>
