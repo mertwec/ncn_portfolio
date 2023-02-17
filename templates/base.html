@@ -29,18 +29,18 @@
 </head>
 
 <header>
-    <div class="header-wrapper rounded">
+    <div class="header-wrapper rounded my-4">
         <!-- navigation -->
         {% include "base_components/navigation.html" %}
 
         <!-- quote -->
         {% include "base_components/rand_quotes.html" %}
     </div>
-    <hr>
+    <!-- <hr> -->
 </header>
 
 <body>
-    <div class="main_wrapper rounded">
+    <div class="main_wrapper rounded my-4">
         {% block content %}
         <div class="container-fluid px-10">
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non ipsum eius blanditiis tempora quas ad esse
@@ -67,8 +67,8 @@
         crossorigin="anonymous"></script>
 
 </body>
-<hr>
-<footer class="footer-wrapper rounded">
+
+<footer class="footer-wrapper rounded my-4">
     {% include "base_components/footer.html"%}
 
 </footer>

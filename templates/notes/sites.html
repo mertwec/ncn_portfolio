@@ -5,40 +5,43 @@
 {% endblock%}
 
 {% block content %}
-<div>
-    <div>
-        <h3>
-            <a href="/notes/sites/">Categories</a> </h3>
-        <ul>
-            {% for cat in categories%}
-            <li>
-                <a href="{% url 'site_category' category_name=cat.name %}">{{ cat.name }}</a>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div>
-        <h3>Links</h3>
-        <table>
-            {% for site in sites %}
-            <tr>
-                <td>{{site.title}}</td>
-                <td>
-                    <a href="{{site.url}}" target="_blank">{{site.url}}</a></td>
-                <td> <a href="/admin/notes/sitenote/{{ site.id }}/change/">
-                        <button class="btn btn-primary">Delete</button>
-                    </a>
-                </td>
-            </tr>
 
-            {% endfor %}
+<div class="col-2 back_color rounded text-truncate ">
+    <h3 class="text-center text-decoration-underline mt-2 py-2 overflow-auto">Categories:</h3>
+    <ul class="list-group py-1 back_color mx-4 overflow-auto">
+        <li class="list-group-item py-1 back_color"><a href="/notes/sites/">All</a></li>
+        {% for cat in categories%}
+        <li class="list-group-item py-1 back_color">
+            <a href="{% url 'site_category' category_name=cat.name %}">{{ cat.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 
-        </table>
-        <span>
-            <a href="/admin/notes/sitenote/add/">add site</a>
+<div class="col m-3">
+    <h3 class="text-decoration-underline mx-4 overflow-auto">Links:</h3>
+    <table class="table">
+        {% for site in sites %}
+        <tr>
+            <td>{{site.title}}</td>
+            <td>
+                <a href="{{site.url}}" target="_blank">{{site.url}}</a>
+            </td>
+            <td>
+                {{site.description}}
+            </td>
+            <td class=""> <a href="/admin/notes/sitenote/{{ site.id }}/change/">
+                    <button class="btn btn-primary btn-sm">Change/Delete</button>
+                </a>
+            </td>
+        </tr>
+
+        {% endfor %}
+    </table>
+
+        <span class="float-end m-3">
+            <a href="/admin/notes/sitenote/add/"><button class="btn btn-primary">Add Site</button></a>
         </span>
-        
-    </div>
 
 </div>
 

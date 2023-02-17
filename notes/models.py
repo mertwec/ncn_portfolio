@@ -65,5 +65,5 @@ class SiteNote(models.Model):
         with connection.cursor() as cursor:
             cursor.execute(query, [category_name])
             rows = cursor.fetchall() 
-        return [{'id':row[0], 'title':row[1], 'url':row[2]} for row in rows]
+        return [{'id':row[0], 'title':row[1], 'url':row[2], 'description':row[3]} for row in rows]
         

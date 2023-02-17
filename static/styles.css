@@ -65,3 +65,7 @@ body {
 .nav_position {
   margin: 10px 20px 0px 20px;
 }
+
+.indent {
+  text-indent: 12px;
+}

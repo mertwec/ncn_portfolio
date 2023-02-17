@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <!-- description -->
+    <div style="text-indent: 16px;">
+        <h5>Used:</h5>
+        <table class="table">
+            <tr>
+                <th scope="row">Language</th>
+                <td>Python3</td>
+            </tr>
+            <tr>
+                <th scope="row">Libraries</th>
+                <td>mathplotlib, numpy, libtiepie</td>
+            </tr>
+            <tr>
+                <th scope="row">OS</th>
+                <td>Windows 7</td>
+            </tr>
+            <tr>
+                <th scope="row">Tool for analyzed</th>
+                <td>USB-oscilloscope <a href="https://www.tiepie.com/en/usb-oscilloscope/handyscope-hs3"
+                target="_blank">"HANDYSCOPE HS3"</a></td>
+            </tr>
+        </table>
+
+        <h5>Description:</h5>
+        <p>
+            It`s simple script to determine the optimal resonant frequency.
+            This allows to get the efficiency of the voltage source up to 96%.</p>
+
+        <p>After running the script, a number of frequencies are fed to the input of the analyzed device,
+            the result is written to a pkl-file for later display.</p>
+
+        Example:
+        <figure class="row">
+            <div class="col">
+                <img src="static/images/projects/freq-1kHz.png" alt="frequency-1kHz" class="img-fluid">
+                <figcaption class="text-center">U=0.7V, f=1kHz</figcaption>
+            </div>
+
+            <div class="col">
+                <img src="static/images/projects/freq-10kHz.png" alt="frequency-3kHz" class="img-fluid">
+                <figcaption class="text-center">U=0.7V, f=10kHz</figcaption>
+            </div>
+
+        </figure>
+        <p>After taking waveforms, gain and phase shift are calculated, for further Frequency Response Analysis.</p>
+        <figure class="text-center">
+            <img src="static/images/projects/calc_result.png" alt="result" class="img-fluid">
+            <figcaption>Result of calculated</figcaption>
+        </figure>
+
+    </div>
+</div>
