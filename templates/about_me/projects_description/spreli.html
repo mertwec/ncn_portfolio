@@ -1,3 +1,5 @@
+{% load static %}
+
 <div class="container-fluid">
     <div style="text-indent: 16px;">
         <table class="table">
@@ -25,7 +27,7 @@
             The control panel is located inside the space module and it is a backup controller.</p>
         <p>The display shows information about the system. </p>
         <figure class="text-center">
-            <img src="static/images/projects/display.png" alt="display" class="img-fluid">
+            <img src="{% static 'media/projects/display.png' %}" alt="display" class="img-fluid">
             <figcaption>Demo of display the control panel</figcaption>
         </figure>
         <ul>

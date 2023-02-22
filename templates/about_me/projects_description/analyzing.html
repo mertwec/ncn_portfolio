@@ -1,3 +1,6 @@
+{% load static %}
+
+
 <div class="container-fluid">
     <!-- description -->
     <div style="text-indent: 16px;">
@@ -33,19 +36,19 @@
         Example:
         <figure class="row">
             <div class="col">
-                <img src="static/images/projects/freq-1kHz.png" alt="frequency-1kHz" class="img-fluid">
+                <img src="{% static 'media/projects/freq-1kHz.png' %}" alt="frequency-1kHz" class="img-fluid">
                 <figcaption class="text-center">U=0.7V, f=1kHz</figcaption>
             </div>
 
             <div class="col">
-                <img src="static/images/projects/freq-10kHz.png" alt="frequency-3kHz" class="img-fluid">
+                <img src="{% static 'media/projects/freq-10kHz.png' %}" alt="frequency-10kHz" class="img-fluid">
                 <figcaption class="text-center">U=0.7V, f=10kHz</figcaption>
             </div>
 
         </figure>
         <p>After taking waveforms, gain and phase shift are calculated, for further Frequency Response Analysis.</p>
         <figure class="text-center">
-            <img src="static/images/projects/calc_result.png" alt="result" class="img-fluid">
+            <img src="{% static 'media/projects/calc_result.png' %}" alt="result" class="img-fluid">
             <figcaption>Result of calculated</figcaption>
         </figure>
 

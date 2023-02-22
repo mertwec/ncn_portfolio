@@ -31,7 +31,8 @@ SECRET_KEY = os.getenv(
 ) 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", True)
+DEBUG = os.getenv('DEBUG', '1').lower() in ['true', 't', '1']
+
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
 
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -88,11 +90,11 @@ WSGI_APPLICATION = 'ncn.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'crib_db.sqlite3',
+        'NAME': BASE_DIR / 'database/crib_db.sqlite3',
     }
 }
 
-DATABASES_QUOTER = os.path.join(BASE_DIR, "static", "quotes.json")
+DATABASES_QUOTER = os.path.join(BASE_DIR, "database", "quotes.json")
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -128,14 +130,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+STATIC_URL = 'static_conect/static/'
+
+
+# any files for static files
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    # ('static', os.path.join(BASE_DIR, 'notes',"static")),
+    # ('media', os.path.join(BASE_DIR, "media")),
+    # ("download", os.path.join(BASE_DIR, "media", "download"))
 ]
 
-STATIC_URL = 'static/'
-
-STATIC_ROOT = os.path.join(BASE_DIR, "static_conect", "static/")
-MEDIA_ROOT = os.path.join(BASE_DIR, "static_conect", "media/")
+STATIC_ROOT = os.path.join(BASE_DIR, "static_conect", "static")
+MEDIA_ROOT = os.path.join(BASE_DIR, "static_conect", "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
