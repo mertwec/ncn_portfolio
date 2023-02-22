@@ -34,5 +34,5 @@ urlpatterns += staticfiles_urlpatterns()
 
 print(f'\nDEBUG: {settings.DEBUG} \n')
 
-import pprint 
-pprint.pprint(urlpatterns) 
+# import pprint 
+# pprint.pprint(urlpatterns) 

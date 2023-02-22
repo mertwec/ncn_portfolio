@@ -35,7 +35,10 @@ DEBUG = os.getenv('DEBUG', '1').lower() in ['true', 't', '1']
 
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
-
+ADMIN_USER = {
+    "login": os.getenv('ADMIN_LOGIN'),
+    "password":os.getenv('ADMIN_PASSWORD')
+}
 
 # Application definition
 
@@ -132,6 +135,7 @@ USE_TZ = True
 
 STATIC_URL = 'static_conect/static/'
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # any files for static files
 STATICFILES_DIRS = [
