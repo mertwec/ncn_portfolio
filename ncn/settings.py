@@ -35,6 +35,7 @@ DEBUG = os.getenv('DEBUG', '1').lower() in ['true', 't', '1']
 
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
+
 ADMIN_USER = {
     "login": os.getenv('ADMIN_LOGIN'),
     "password":os.getenv('ADMIN_PASSWORD')
@@ -54,7 +55,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -118,6 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -135,7 +137,7 @@ USE_TZ = True
 
 STATIC_URL = 'static_conect/static/'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # any files for static files
 STATICFILES_DIRS = [
