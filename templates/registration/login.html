@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+<div class="container-fluid m-5">
+    <div class="row text-center justify-content-center">
+        <h2 class="text-decoration-underline mb-2"> Login </h2>
+
+        {% if user.is_authenticated %}
+        <p class="p-3">You are already authenticated</p>
+        {% else %}
+        <form class="float-end" method="POST">
+            {%csrf_token%}
+            {{form.as_p}}
+            <input type="hidden" name="next" value="{{next}}">
+            <input type="submit" class="btn btn-primary" value="Enter">
+        </form>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

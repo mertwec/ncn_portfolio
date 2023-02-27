@@ -2,24 +2,29 @@
 
 {% block title %}
 {{title}}
-{% endblock%}
+{% endblock %}
 
 {% block content %}
 
 <div class="col-2 back_color rounded text-truncate ">
     <h3 class="text-center text-decoration-underline mt-2 py-2 overflow-auto">Categories:</h3>
     <ul class="list-group py-1 back_color mx-4 overflow-auto">
-        <li class="list-group-item py-1 back_color"><a href="/notes/sites/">All</a></li>
+
+        <li class="list-group-item py-1 back_color">
+            <a href="{% url 'site_category' category_name='All' %}">All</a>
+        </li>
+
         {% for cat in categories%}
         <li class="list-group-item py-1 back_color">
             <a href="{% url 'site_category' category_name=cat.name %}">{{ cat.name }}</a>
         </li>
         {% endfor %}
+
     </ul>
 </div>
 
 <div class="col m-3 overflow-auto">
-    <h3 class="text-decoration-underline mx-4 ">Links:</h3>
+    <h3 class="text-decoration-underline mx-4 ">{{category}} Links:</h3>
     <table class="table">
         {% for site in sites %}
         <tr>
@@ -30,18 +35,39 @@
             <td>
                 {{site.description}}
             </td>
+            {% if user.is_authenticated %}
             <td class=""> <a href="/admin/notes/sitenote/{{ site.id }}/change/">
                     <button class="btn btn-primary btn-sm">Change/Delete</button>
                 </a>
             </td>
+            {% endif %}
         </tr>
-
         {% endfor %}
     </table>
 
+    <!-- pagination -->
+    <div class="text-center">
+        {% if page.has_previous %}
+            <a href="?page={{page.previous_page_number}}"> &lt; </a>
+            &nbsp; | &nbsp; 
+        {% endif %}
+
+        Part {{ page.number }} from {{ page.paginator.num_pages }}
+
+        {% if page.has_next %}
+            &nbsp; | &nbsp; 
+            <a href="?page={{page.next_page_number }}"> &gt; </a>
+        {% endif %}
+    </div>
+
+    {% if user.is_authenticated %}
+    <span class="float-start m-3">
+         <a href="#"><button class="btn btn-primary">Dump database</button></a>
+    </span>
     <span class="float-end m-3">
         <a href="/admin/notes/sitenote/add/"><button class="btn btn-primary">Add Site</button></a>
     </span>
+    {% endif %}
 
 </div>
 

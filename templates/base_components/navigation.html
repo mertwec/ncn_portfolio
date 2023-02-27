@@ -27,7 +27,9 @@
                         Sites
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/notes/sites/">All sites</a></li>
+                        <li>
+                            <a class="dropdown-item" href="/notes/sites/">All sites</a>
+                        </li>
                         {% for cat in categories %}
                         <li>
                             <a class="dropdown-item"
@@ -37,7 +39,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-item ">
+                <li class="nav-item">
                     <a class="nav-link disabled" href="/notes">
                         Notes
                     </a>
@@ -57,6 +59,11 @@
 
             </ul>
         </div>
+        <span>
+            {% if user.is_authenticated %}
+            <a href="/user/logout/"><button class="btn btn-primary">logout</button></a>
+            {% endif %}
+        </span>
 
     </div>
 </nav>

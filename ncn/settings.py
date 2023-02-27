@@ -12,13 +12,16 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 import os
 from pathlib import Path
+
+import django.middleware.cache
 from dotenv import load_dotenv
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+PROJECT_DIR = BASE_DIR / 'ncn'
 
-# load varenvironment 
+# load var_environment
 load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 # Quick-start development settings - unsuitable for production
@@ -26,7 +29,7 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv(
-    "SECRET_KEY_DJANGO",
+    "SECRET_KEY",
     'django-insecure-w5hk*a-dqqz$_id*l1pax7t#7z(sryzaj(30k5$rfp7=1o+fte'
 ) 
 
@@ -38,7 +41,7 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
 
 ADMIN_USER = {
     "login": os.getenv('ADMIN_LOGIN'),
-    "password":os.getenv('ADMIN_PASSWORD')
+    "password": os.getenv('ADMIN_PASSWORD')
 }
 
 # Application definition
@@ -54,14 +57,17 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django.middleware.http.ConditionalGetMiddleware',  # for client cache
+    'django.middleware.cache.UpdateCacheMiddleware',    # for server cache
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',       # connect whitenoise for static
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',   # for server cache
 ]
 
 ROOT_URLCONF = 'ncn.urls'
@@ -69,7 +75,7 @@ ROOT_URLCONF = 'ncn.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "templates"),],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -86,7 +92,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ncn.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -118,7 +123,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+LOGIN_URL = "/user/login/"
+LOGIN_REDIRECT_URL = "/"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -135,20 +141,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static_conect/static/'
+STATIC_URL = '/static/'
 
 STORAGES = {
-    # ...
+    # for django >= 4.2
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # for django < 4.2
+ 
 # any files for static files
 STATICFILES_DIRS = [
-    # ('static', os.path.join(BASE_DIR, 'notes',"static")),
+    os.path.join(BASE_DIR, "static_conect"),
+    # ('static', os.path.join(BASE_DIR, "static")),
     # ('media', os.path.join(BASE_DIR, "media")),
     # ("download", os.path.join(BASE_DIR, "media", "download"))
 ]
@@ -160,3 +167,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "static_conect", "media")
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CACHES = {
+    'default': {
+        'BACKEND': "django.core.cache.backends.filebased.FileBasedCache",
+        'LOCATION': BASE_DIR / 'cache_file',
+        'TIMEOUT': 900,
+    }
+}

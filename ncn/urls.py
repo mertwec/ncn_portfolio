@@ -18,16 +18,18 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.staticfiles.views import serve
 from django.views.static import serve as media_serve
-
-from django.conf import settings
-from components.view_root import main, resume
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf import settings
+
+from components.view_root import resume
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("", resume),
+    path("user/", include("user.urls")),
     path("notes/", include("notes.urls")),
     # path("news/", include("news.urls")),
-    path("", resume),
+
 ]
 
 urlpatterns += staticfiles_urlpatterns()

@@ -5,19 +5,19 @@ from datetime import datetime
 class Note(models.Model):
     text_content = models.TextField()
     created = models.DateTimeField(auto_now=True)
-    
+
     class Meta:
         # verbose_name = "Заметки"
         db_table = "notes"
         ordering = ["created"]
-    
+
     def __str__(self):
         return f"{self.pk}: {self.text_content}"
 
 
 class Category(models.Model):
     name = models.CharField(max_length=150)
-    
+
     class Meta:
         verbose_name = "Category"
         verbose_name_plural = "Categories"
@@ -33,10 +33,10 @@ class SiteNote(models.Model):
     url = models.URLField(unique=True, null=False)
     description = models.TextField(null=True, blank=True)
     category = models.ForeignKey(
-        Category, 
-        on_delete=models.CASCADE, 
+        Category,
+        on_delete=models.CASCADE,
         related_name="sites",
-        )
+    )
     created_at = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -64,6 +64,13 @@ class SiteNote(models.Model):
         """
         with connection.cursor() as cursor:
             cursor.execute(query, [category_name])
-            rows = cursor.fetchall() 
-        return [{'id':row[0], 'title':row[1], 'url':row[2], 'description':row[3]} for row in rows]
-        
+            rows = cursor.fetchall()
+        return [
+            {
+                'id': row[0],
+                'title':row[1],
+                'url':row[2],
+                'description':row[3],
+                "created_at":row[4]
+            }
+            for row in rows]
