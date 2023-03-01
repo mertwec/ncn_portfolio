@@ -1,14 +1,10 @@
 import json
 import os
-import pdb
 
-from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 from django.views.decorators import http 
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
-
-from django.core.files.uploadedfile import InMemoryUploadedFile
 
 from notes.models import Note, SiteNote, Category
 from notes.forms import NoteForm
@@ -99,6 +95,7 @@ def dump_sites_db(request):
     )
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def load_dump_sites_db(request):
     """get uploaded file
     """
