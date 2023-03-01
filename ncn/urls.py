@@ -17,7 +17,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.views.static import serve as media_serve 
+from django.views.static import serve as media_serve
 from django.conf import settings
 
 from ncn.components.view_root import resume
@@ -39,9 +39,9 @@ else:
         'media/<path:path>',
         media_serve,
         {"document_root": settings.MEDIA_ROOT}
-) )
+    ))
 
 print(f'\nDEBUG: {settings.DEBUG} \n')
 
 # import pprint 
-# pprint.pprint(urlpatterns) 
+# pprint.pprint(urlpatterns)
