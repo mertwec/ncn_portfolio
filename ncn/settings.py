@@ -99,11 +99,11 @@ WSGI_APPLICATION = 'ncn.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'database/crib_db.sqlite3',
+        'NAME': PROJECT_DIR / 'database/crib_db.sqlite3',
     }
 }
 
-DATABASES_QUOTER = os.path.join(BASE_DIR, "database", "quotes.json")
+DATABASES_QUOTER = os.path.join(PROJECT_DIR, "database", "quotes.json")
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -142,6 +142,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
 STORAGES = {
     # for django >= 4.2
@@ -154,14 +155,14 @@ STORAGES = {
  
 # any files for static files
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static_conect"),
-    # ('static', os.path.join(BASE_DIR, "static")),
-    # ('media', os.path.join(BASE_DIR, "media")),
-    # ("download", os.path.join(BASE_DIR, "media", "download"))
+    # os.path.join(BASE_DIR, "static_conect"),
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static_conect", "static")
 MEDIA_ROOT = os.path.join(BASE_DIR, "static_conect", "media")
+
+DUMP_FILE = "sites.json"
+DUMP_DB_PATH = os.path.join(BASE_DIR, "static_conect", "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

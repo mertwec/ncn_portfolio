@@ -4,5 +4,6 @@
 __pycache__
 .idea/
 
-# static_conect
+static_conect
 cache_file
+temp.py

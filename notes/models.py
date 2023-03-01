@@ -16,16 +16,20 @@ class Note(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=150)
+    name = models.CharField(max_length=150, unique=True)
 
     class Meta:
         verbose_name = "Category"
         verbose_name_plural = "Categories"
         db_table = "categories"
-        ordering = ["name",]
+        ordering = ["name", ]
 
     def __str__(self):
         return f"{self.name}"
+
+    @classmethod
+    def get_names_categories(cls):
+        return [cat.name for cat in cls.objects.all()]
 
 
 class SiteNote(models.Model):
@@ -68,9 +72,32 @@ class SiteNote(models.Model):
         return [
             {
                 'id': row[0],
-                'title':row[1],
-                'url':row[2],
-                'description':row[3],
-                "created_at":row[4]
-            }
-            for row in rows]
+                'title': row[1],
+                'url': row[2],
+                'description': row[3],
+                "created_at": row[4]
+            } for row in rows
+        ]
+
+    @classmethod
+    def get_sites(cls):
+        query = """
+            SELECT sn.title, sn.url, sn.description, 
+                c.id, c.name, sn.id
+            FROM sites_notes as sn
+            JOIN categories as c 
+            ON sn.category_id = c.id
+        """
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            rows = cursor.fetchall()
+        return [
+            {
+                "id": i[5],
+                'title': i[0],
+                'url': i[1],
+                'description': i[2],
+                'cat_id': i[3],
+                'cat_name': i[4]
+            } for i in rows
+        ]
