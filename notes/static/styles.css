@@ -9,7 +9,7 @@ body {
     padding: 40px 40px 40px 40px;
     /* top, right, botom, left */
     background-color: rgb(148, 202, 238);
-    background-image: url("/static/media/background_forest.jpeg");
+    background-image: url("/static/images/background_forest.jpeg");
     background-repeat: space;
     background-position: center;
     background-attachment: fixed;

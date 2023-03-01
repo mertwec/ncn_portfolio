@@ -4,7 +4,7 @@
     <div class="container-fluid px-8">
 
         <a class="navbar-brand" href="/">
-            <img src="{% static 'media/favicon_io/android-chrome-512x512.png' %}" alt="logo" width="36"
+            <img src="{% static 'images/favicon_io/android-chrome-512x512.png' %}" alt="logo" width="36"
                 class="d-inline-block align-text-top">
             <!-- NCN -->
         </a>
@@ -33,7 +33,7 @@
                         {% for cat in categories %}
                         <li>
                             <a class="dropdown-item"
-                                href="{% url 'site_category' category_name=cat.name %}">{{cat.name}}</a>
+                                href="{% url 'notes:site_category' category_name=cat.name %}">{{cat.name}}</a>
                         </li>
                         {% endfor%}
                     </ul>

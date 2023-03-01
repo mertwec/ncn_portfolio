@@ -11,12 +11,12 @@
     <ul class="list-group py-1 back_color mx-4 overflow-auto">
 
         <li class="list-group-item py-1 back_color">
-            <a href="{% url 'site_category' category_name='All' %}">All</a>
+            <a href="{% url 'notes:site_category' category_name='All' %}">All</a>
         </li>
 
         {% for cat in categories%}
         <li class="list-group-item py-1 back_color">
-            <a href="{% url 'site_category' category_name=cat.name %}">{{ cat.name }}</a>
+            <a href="{% url 'notes:site_category' category_name=cat.name %}">{{ cat.name }}</a>
         </li>
         {% endfor %}
 
@@ -48,22 +48,33 @@
     <!-- pagination -->
     <div class="text-center">
         {% if page.has_previous %}
-            <a href="?page={{page.previous_page_number}}"> &lt; </a>
-            &nbsp; | &nbsp; 
+        <a href="?page={{page.previous_page_number}}"> &lt; </a>
+        &nbsp; | &nbsp;
         {% endif %}
 
         Part {{ page.number }} from {{ page.paginator.num_pages }}
 
         {% if page.has_next %}
-            &nbsp; | &nbsp; 
-            <a href="?page={{page.next_page_number }}"> &gt; </a>
+        &nbsp; | &nbsp;
+        <a href="?page={{page.next_page_number }}"> &gt; </a>
         {% endif %}
     </div>
 
+    <!-- dump and load data in database -->
     {% if user.is_authenticated %}
     <span class="float-start m-3">
-         <a href="#"><button class="btn btn-primary">Dump database</button></a>
+        <a href="{% url 'notes:sites_dump' %}">
+            <button class="btn btn-primary">Create dump DB</button>
+        </a>
     </span>
+
+    <span class="float-start m-3">
+        <a href="{% url 'notes:sites_load' %}"><button class="btn btn-primary">Load Database</button></a>
+    </span>
+
+
+
+    <!-- add site from Admin  -->
     <span class="float-end m-3">
         <a href="/admin/notes/sitenote/add/"><button class="btn btn-primary">Add Site</button></a>
     </span>
