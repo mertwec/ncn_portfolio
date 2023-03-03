@@ -106,7 +106,7 @@ def load_dump_sites_db(request):
         if request_file:
 
             if request_file.name.split('.')[1] != 'json':
-                print('load json file')
+                print('load only json file')
                 return redirect("/notes/sites/")
             
             # open and read uploaded file

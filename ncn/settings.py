@@ -15,6 +15,7 @@ from pathlib import Path
 
 import django.middleware.cache
 from dotenv import load_dotenv
+import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -58,9 +59,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.middleware.http.ConditionalGetMiddleware',  # for client cache
-    'django.middleware.cache.UpdateCacheMiddleware',    # for server cache
     'whitenoise.middleware.WhiteNoiseMiddleware',       # connect whitenoise for static
+    # 'django.middleware.http.ConditionalGetMiddleware',  # for client cache
+    'django.middleware.cache.UpdateCacheMiddleware',    # for server cache
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -97,10 +98,20 @@ WSGI_APPLICATION = 'ncn.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': PROJECT_DIR / 'database/crib_db.sqlite3',
-    }
+    'default': dj_database_url.parse(os.getenv("DATABASE_URL"),conn_max_age=600)
+    # {
+    #     "ENGINE": "django.db.backends.postgresql",
+    #     "NAME": "ncn_portfolio_db",
+    #     'USER': os.getenv("USER_POSTGRES", 'postgres'),
+    #     'PASSWORD': os.getenv("PASSWORD_POSTGRES"),
+    #     'HOST': 'localhost',
+    #     'PORT': '',
+    # }
+    
+    # 'sqlite': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': PROJECT_DIR / 'database/crib_db.sqlite3',
+    # }
 }
 
 DATABASES_QUOTER = os.path.join(PROJECT_DIR, "database", "quotes.json")
@@ -173,6 +184,6 @@ CACHES = {
     'default': {
         'BACKEND': "django.core.cache.backends.filebased.FileBasedCache",
         'LOCATION': BASE_DIR / 'cache_file',
-        'TIMEOUT': 900,
+        'TIMEOUT': 300,
     }
 }
