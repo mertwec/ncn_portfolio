@@ -8,4 +8,9 @@ def main(request: HttpRequest):
 
 def resume(request: HttpRequest):
     return render(request, template_name="about_me/resume.html")   
+
+
+def mock_api(request):
+    """for update serwer render.com"""
+    return HttpResponse()
     

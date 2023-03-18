@@ -20,11 +20,12 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.static import serve as media_serve
 from django.conf import settings
 
-from ncn.components.view_root import resume
+from ncn.components.view_root import resume, mock_api
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", resume),
+    path("mock/", mock_api),
     path("user/", include("user.urls")),
     path("notes/", include("notes.urls")),
     # path("news/", include("news.urls")),
