@@ -1,32 +1,45 @@
 {% extends "base.html" %}
 
+{% block title %}
+{{title}}
+{% endblock %}
+
 {% block content %}
-    <h1>My TODO list</h1>
-    <br />
-    <table class=".table">
-        <tr>
-            <th>Note</th>
-            <th>Options</th>
-        </tr>
+<div class="container-fluid px-5">
+    <h2 class="text-center text-decoration-underline mx-4">
+        My TODO list
+    </h2>
+    <div class="row m-3 overflow-auto">
+        <table class="table">
+            <tr>
+                <th>Note</th>
+                <th>Options</th>
+            </tr>
 
-        {% for n in notes %}
-        <tr>
-            <td><p class="lead">{{n.text_content}}</p></td>
+            {% for n in notes %}
+            <tr>
+                <td>
+                    <p class="lead">{{n.text_content}}</p>
+                </td>
 
-            <td class="btn-group">
-                <a href="/notes/delete/{{ n.pk }}">
-                    <button class="btn btn-primary">Delete</button>
-                </a>
-            </td>
-        </tr>
-        {% endfor %}
+                <td class="btn-group">
+                    <a href="/notes/delete/{{ n.pk }}">
+                        <button class="btn btn-primary">Delete</button>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
 
-        <tr>
-            <form method="POST" class="form-horizontal">
-                {% csrf_token %}
-                <td>{{form.as_p}}</td>
-                <td><input type="submit" value="Add note" class="btn btn-primary"></td>
-            </form>
-        </tr>
-    </table>
+            <tr>
+                <form method="POST" class="form-horizontal">
+                    {% csrf_token %}
+                    <td>{{form.as_p}}</td>
+                    <td><input type="submit" value="Add note" class="btn btn-primary"></td>
+                </form>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
 {% endblock %}

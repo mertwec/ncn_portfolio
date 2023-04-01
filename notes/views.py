@@ -2,7 +2,7 @@ import json
 import os
 
 from django.shortcuts import render, redirect
-from django.views.decorators import http 
+from django.views.decorators import http
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 
@@ -11,25 +11,25 @@ from notes.forms import NoteForm
 from ncn import settings
 
 
+# --Notes-----------------------------------------------------------
 @http.require_http_methods(["GET", "POST"])
 def notes(request):
-    template = "notes/notes.html"
     notes = Note.objects.all()
     if request.method == "POST":
         form = NoteForm(request.POST)
         if form.is_valid():
-            new_note = form.save(commit=False)
-            new_note.save()
-            return render(
-                request,
-                template_name="notes/notes.html",
-                context={"notes": notes, "form": NoteForm()}
-            )
+            form.save()
+            return redirect("/notes")
+
     form = NoteForm()
     return render(
         request,
         template_name="notes/notes.html",
-        context={"notes": notes, "form": form}
+        context={
+            "notes": notes,
+            "form": form,
+            "title": "Notes"
+        }
     )
 
 
@@ -46,7 +46,7 @@ def sites_all(request, category_name=''):
         sites = SiteNote.objects.all()
     else:
         sites = SiteNote.get_by_category(category_name)
-    
+
     paginator = Paginator(sites, 7)
     if 'page' in request.GET:
         page_num = request.GET["page"]
@@ -108,12 +108,13 @@ def load_dump_sites_db(request):
             if request_file.name.split('.')[1] != 'json':
                 print('load only json file')
                 return redirect("/notes/sites/")
-            
+
             # open and read uploaded file
             with request_file.open(mode='r') as rfile:
                 upload_data = json.loads(rfile.read())     # list[dict]
-                for upl_site in upload_data:   
-                    category_ = Category.objects.get_or_create(name=upl_site["cat_name"])
+                for upl_site in upload_data:
+                    category_ = Category.objects.get_or_create(
+                        name=upl_site["cat_name"])
 
                     print(f'{upl_site["cat_name"]} added {category_}')
                     sn = SiteNote.objects.update_or_create(
@@ -122,8 +123,8 @@ def load_dump_sites_db(request):
                         description=upl_site["description"],
                         category=category_[0],
                     )
-                    print(sn)          
-          
+                    print(sn)
+
             # save attached file
             # fs = FileSystemStorage()
             # file = fs.save(request_file.name, request_file)

@@ -38,13 +38,15 @@
                         {% endfor%}
                     </ul>
                 </li>
-
+                {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="/notes">
+
+                    <a class="nav-link active" href="/notes">
                         Notes
                     </a>
-                </li>
 
+                </li>
+                {% endif %}
                 <li class="nav-item ">
                     <a class="nav-link disabled" href="#">
                         Blog

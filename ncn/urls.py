@@ -42,7 +42,7 @@ else:
         {"document_root": settings.MEDIA_ROOT}
     ))
 
-print(f'\nDEBUG: {settings.DEBUG} \n')
+# print(f'\nDEBUG: {settings.DEBUG} \n')
 
 # import pprint 
 # pprint.pprint(urlpatterns)
