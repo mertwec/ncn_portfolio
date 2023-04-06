@@ -28,7 +28,7 @@ urlpatterns = [
     path("mock/", mock_api),
     path("user/", include("user.urls")),
     path("notes/", include("notes.urls")),
-    # path("news/", include("news.urls")),
+    path("news/", include("news.urls")),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

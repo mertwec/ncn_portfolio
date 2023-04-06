@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators import http
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
 
 from notes.models import Note, SiteNote, Category
 from notes.forms import NoteForm
@@ -12,6 +13,7 @@ from ncn import settings
 
 
 # --Notes-----------------------------------------------------------
+@never_cache
 @http.require_http_methods(["GET", "POST"])
 def notes(request):
     notes = Note.objects.all()
