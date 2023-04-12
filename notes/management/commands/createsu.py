@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
-from  ncn.settings import ADMIN_USER
+from ncn.settings import ADMIN_USER
 
 
 class Command(BaseCommand):

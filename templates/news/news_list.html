@@ -16,23 +16,33 @@
         </a>
     </div>
 
-    <ul class="list-group px-3">
+    <div class="container-fluid row">
         {% for item_news in news %}
-        <li class="list-group-item">
-            <div class="m-2">
-                <img src="{{item_news.image_url}}" class="img-fluid rounded mx-auto" 
-                alt="{{item_news.title}}"
-                    width="300">
-                <a href="{{item_news.url}}" target="_blank" class="link-dark">
-                    <h4>{{item_news.title}}</h2>
-                </a>
-                <p>{{item_news.added_at}}</p>
+        <div class="col-sm-4 my-2">
+            <div class="card my-2 p-1 h-100">
+                <img src="{{item_news.image_url}}" class="card-img-top rounded mx-auto" alt="{{item_news.title}}">
+                <h5 class=card-title">{{item_news.title}}</h5>
+                <p class="card-text text-end fst-italic text-muted pt-3">{{item_news.added_at}}</p>
+                <a href="{{item_news.url}}" target="_blank" class="btn btn-primary mt-auto">Read news</a>
             </div>
-        </li>
-
-
+        </div>
         {% endfor %}
-    </ul>
+    </div>
+
+     <!-- pagination -->
+    <div class="text-center">
+        {% if page.has_previous %}
+        <a href="?page={{page.previous_page_number}}"> &lt; </a>
+        &nbsp; | &nbsp;
+        {% endif %}
+
+        Part {{ page.number }} from {{ page.paginator.num_pages }}
+
+        {% if page.has_next %}
+        &nbsp; | &nbsp;
+        <a href="?page={{page.next_page_number }}"> &gt; </a>
+        {% endif %}
+    </div>
 
 </div>
 {% endblock%}
