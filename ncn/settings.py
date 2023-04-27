@@ -17,7 +17,6 @@ import django.middleware.cache
 from dotenv import load_dotenv
 import dj_database_url
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_DIR = BASE_DIR / 'ncn'
@@ -32,11 +31,10 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = os.getenv(
     "SECRET_KEY",
     'django-insecure-w5hk*a-dqqz$_id*l1pax7t#7z(sryzaj(30k5$rfp7=1o+fte'
-) 
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', '1').lower() in ['true', 't', '1']
-
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
 
@@ -60,17 +58,22 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',       # connect whitenoise for static
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # connect whitenoise for static
     # 'django.middleware.http.ConditionalGetMiddleware',  # for client cache
-    'django.middleware.cache.UpdateCacheMiddleware',    # for server cache
+    'django.middleware.cache.UpdateCacheMiddleware',  # for server cache
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',   # for server cache
+    # 'django.middleware.cache.FetchFromCacheMiddleware',   # for server cache
 ]
+
+if DEBUG is False:
+    MIDDLEWARE += ['django.middleware.cache.FetchFromCacheMiddleware',  # for server cache
+                   'django.middleware.cache.UpdateCacheMiddleware',  # for server cache
+                   ]
 
 ROOT_URLCONF = 'ncn.urls'
 
@@ -97,13 +100,15 @@ WSGI_APPLICATION = 'ncn.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-DB_USER = os.getenv("USER_POSTGRES", 'postgres')
-DB_PASS = os.getenv("PASSWORD_POSTGRES")
-DB_NAME = os.getenv("DB_POSTGRES")
-database_url = f"postgres://{DB_USER}:{DB_PASS}@localhost/{DB_NAME}"
+USER_DATABASE = os.getenv("USER_POSTGRES")
+PASSWORD_DATABASE = os.getenv("PASSWORD_POSTGRES")
+NAME_DATABASE = os.getenv("DB_POSTGRES")
+
+LOCAL_DATABASE_URL = f"postgres://{USER_DATABASE}:{PASSWORD_DATABASE}@localhost/{NAME_DATABASE}"
 
 DATABASES = {
-    'default': dj_database_url.parse(os.getenv("DATABASE_URL", database_url), conn_max_age=600)
+    'default': dj_database_url.parse(os.getenv("DATABASE_URL", LOCAL_DATABASE_URL), conn_max_age=600)
+
     # {
     #     "ENGINE": "django.db.backends.postgresql",
     #     "NAME": "ncn_portfolio_db",
@@ -112,7 +117,7 @@ DATABASES = {
     #     'HOST': 'localhost',
     #     'PORT': '',
     # }
-    
+
     # 'sqlite': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': PROJECT_DIR / 'database/crib_db.sqlite3',
@@ -153,7 +158,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
@@ -168,7 +172,7 @@ STORAGES = {
 }
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # for django < 4.2
- 
+
 # any files for static files
 STATICFILES_DIRS = [
     # os.path.join(BASE_DIR, "static_conect"),

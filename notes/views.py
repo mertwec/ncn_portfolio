@@ -10,13 +10,14 @@ from django.views.decorators.cache import never_cache
 from notes.models import Note, SiteNote, Category
 from notes.forms import NoteForm
 from ncn import settings
+from ncn.components.tools_view import paginate_object
 
 
 # --Notes-----------------------------------------------------------
 @never_cache
 @http.require_http_methods(["GET", "POST"])
 def notes(request):
-    notes = Note.objects.all()
+    notes_list = Note.objects.all()
     if request.method == "POST":
         form = NoteForm(request.POST)
         if form.is_valid():
@@ -28,7 +29,7 @@ def notes(request):
         request,
         template_name="notes/notes.html",
         context={
-            "notes": notes,
+            "notes": notes_list,
             "form": form,
             "title": "Notes"
         }
@@ -49,23 +50,16 @@ def sites_all(request, category_name=''):
     else:
         sites = SiteNote.get_by_category(category_name)
 
-    paginator = Paginator(sites, 7)
-    if 'page' in request.GET:
-        page_num = request.GET["page"]
-    else:
-        page_num = 1
-
-    page = paginator.get_page(page_num)     # get current page
-    sites_on_page = page.object_list
+    ppage = paginate_object(request, sites, 10)
 
     return render(
         request,
         template_name="notes/sites.html",
         context={
             "title": f"{category_name} Links",
-            "sites": sites_on_page,
+            "sites": ppage['objects_on_page'],
             "category": category_name,
-            'page': page,
+            'page': ppage['page'],
             # "categories": categorys,      # add in middleware
         }
     )

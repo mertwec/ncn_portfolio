@@ -2,7 +2,6 @@ from urllib.request import Request
 from bs4 import BeautifulSoup, ResultSet
 from typing import List, Optional
 import pydantic
-import pdb
 
 
 class Image(pydantic.BaseModel):
@@ -22,6 +21,7 @@ ROOT_URL = "https://www.tesmanian.com"
 
 def parsing_request(request_object: Request) -> BeautifulSoup:
     return BeautifulSoup(request_object.text, "html.parser")
+    # return BeautifulSoup(request_object.text, "lxml")
 
 
 def generate_url_next_page(url: str, page=1) -> str:
@@ -33,7 +33,6 @@ def generate_url_next_page(url: str, page=1) -> str:
 
 def get_news_tasmania(soup: BeautifulSoup) -> dict:
     block_news = soup.find_all('blog-post-card')
-
     result_news = [News(
         title=item.find("div", class_="blog-post-card__info").find("a").text,
         url=ROOT_URL +
@@ -45,7 +44,4 @@ def get_news_tasmania(soup: BeautifulSoup) -> dict:
     )
         for item in block_news
     ]
-
-    # pdb.set_trace()
-
     return result_news

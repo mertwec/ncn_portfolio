@@ -7,4 +7,8 @@ add comments for posts comment
 -- add authorization
 transfer from SPA
 
--- add block news
+
+* news
+
+-- add pagination to news
+-- add news nasa
