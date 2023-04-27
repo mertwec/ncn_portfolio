@@ -8,14 +8,15 @@
 {% block content %}
 <div class="container-fluid row justify-content-center  my-5 ">
     {% if error_message %}
-    <p>{{error_message}}</p>
+    <p class="text-center text-danger">{{error_message}}</p>
     {% endif %}
-    <div class="container row text-end m-3">
-        <a class="nav-link active" href="{% url 'news:get_latest_news' %}">
-            <button class="btn btn-primary">Check latest news</button>
-        </a>
+
+    <div class="d-flex flex-row-reverse">
         <a class="nav-link active" href="{% url 'news:delete_old_news' %}">
-            <button class="btn btn-primary">Delete old news</button>
+            <button class="btn btn-primary m-2">Delete old news</button>
+        </a>
+        <a class="nav-link active" href="{% url 'news:get_latest_news' %}">
+            <button class="btn btn-primary m-2">Check latest news</button>
         </a>
     </div>
 
@@ -24,7 +25,7 @@
         <div class="col-sm-4 my-2">
             <div class="card my-2 p-1 h-100">
                 <img src="{{item_news.image_url}}" class="card-img-top rounded mx-auto" alt="{{item_news.title}}">
-                <h5 class=card-title">{{item_news.title}}</h5>
+                <h5 class="card-title">{{item_news.title}}</h5>
                 <p class="card-text text-end fst-italic text-muted pt-3">{{item_news.added_at}}</p>
                 <a href="{{item_news.url}}" target="_blank" class="btn btn-primary mt-auto">Read news</a>
             </div>
@@ -32,7 +33,7 @@
         {% endfor %}
     </div>
 
-     <!-- pagination -->
+    <!-- pagination -->
     <div class="text-center">
         {% if page.has_previous %}
         <a href="?page={{page.previous_page_number}}"> &lt; </a>

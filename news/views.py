@@ -10,6 +10,7 @@ from news.scraping.tools.scraping_tesmanian import ROOT_URL, parsing_request, ge
 from news.scraping.tools.tool_requests import get_request
 from ncn.components.tools_view import paginate_object
 
+
 @cache.never_cache
 @http.require_http_methods(["GET", "POST"])
 def get_news(request: HttpRequest):
@@ -48,13 +49,25 @@ def update_news(request: HttpRequest):
 
     return redirect(reverse("news:list_news"))
 
-
-
-def delete_old_news(request: HttpRequest, N_days: int=15):
+@cache.never_cache
+def delete_old_news(request: HttpRequest, N_days: int = 15):
     """ Deleting news from Db if data news > today on N days
     """
     data_ago = datetime.now() - timedelta(days=N_days)
-    trash_news = News.objects.all().filter(added_at__gt=data_ago)
-    breakpoint()
+    news = News.objects.all()
+    trash_news = news.filter(added_at__lte=data_ago)
+    if trash_news:
+        trash_news.delete()
+        ppage = paginate_object(request, news, 6)
 
+        return render(
+            request,
+            template_name="news/news_list.html",
+            context={
+                    "news": ppage['objects_on_page'],
+                    'page': ppage['page'],
+                    "title": "News",
+                    "error_message": f"All News older than {N_days} days is deleted"
+                    }
+        )
     return redirect(reverse("news:list_news"))
