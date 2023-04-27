@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import HttpRequest
@@ -40,5 +41,15 @@ def update_news(request: HttpRequest):
                 text = info.text,
                 source = source_news[0]          
             )   
+
+    return redirect(reverse("news:list_news"))
+
+
+def delete_old_news(request: HttpRequest, N_days: int=15):
+    """ Deleting news from Db if data news > today on N days
+    """
+    data_ago = datetime.now() - timedelta(days=N_days)
+    trash_news = News.objects.all().filter(added_at__gt=data_ago)
+    breakpoint()
 
     return redirect(reverse("news:list_news"))

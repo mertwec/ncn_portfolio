@@ -18,7 +18,7 @@ class SourceNews(models.Model):
         verbose_name_plural = 'Sources news'
 
     def __str__(self):
-        return f"{self.title}: {self.site}"
+        return f"{self.title}"
 
 
 class News(models.Model):
@@ -29,7 +29,7 @@ class News(models.Model):
     source = models.ForeignKey(
         SourceNews,
         on_delete=models.CASCADE,
-        related_name='site_news',
+        related_name='sites_news',
         null=False,
         blank=False
     )
@@ -41,6 +41,9 @@ class News(models.Model):
         verbose_name = 'News'
         verbose_name_plural = 'News'
         ordering = ['-added_at']
+        indexes = [
+            models.Index(fields=['added_at'])
+        ]
 
     def __str__(self):
         return f"{self.title}: {self.url}   {self.added_at}"

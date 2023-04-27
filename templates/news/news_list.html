@@ -11,17 +11,20 @@
     <p>{{error_message}}</p>
     {% endif %}
     <div class="container row text-end m-3">
-        <a class="nav-link active" href="{% url 'news:get_latest_news' %}">
+        <p><a class="nav-link active" href="{% url 'news:get_latest_news' %}">
             <button class="btn btn-primary">Check latest news</button>
-        </a>
+        </a></p>
+        <p> <a class="nav-link active" href="{% url 'news:delete_old_news' %}">
+            <button class="btn btn-primary">Delete old news</button>
+        </a></p>
+       
     </div>
 
     <ul class="list-group px-3">
         {% for item_news in news %}
         <li class="list-group-item">
             <div class="m-2">
-                <img src="{{item_news.image_url}}" class="img-fluid rounded mx-auto" 
-                alt="{{item_news.title}}"
+                <img src="{{item_news.image_url}}" class="img-fluid rounded mx-auto" alt="{{item_news.title}}"
                     width="300">
                 <a href="{{item_news.url}}" target="_blank" class="link-dark">
                     <h4>{{item_news.title}}</h2>

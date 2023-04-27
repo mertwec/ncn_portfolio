@@ -97,9 +97,13 @@ WSGI_APPLICATION = 'ncn.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+DB_USER = os.getenv("USER_POSTGRES", 'postgres')
+DB_PASS = os.getenv("PASSWORD_POSTGRES")
+DB_NAME = os.getenv("DB_POSTGRES")
+database_url = f"postgres://{DB_USER}:{DB_PASS}@localhost/{DB_NAME}"
 
 DATABASES = {
-    'default': dj_database_url.parse(os.getenv("DATABASE_URL"),conn_max_age=600)
+    'default': dj_database_url.parse(os.getenv("DATABASE_URL", database_url), conn_max_age=600)
     # {
     #     "ENGINE": "django.db.backends.postgresql",
     #     "NAME": "ncn_portfolio_db",
