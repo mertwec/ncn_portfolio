@@ -40,9 +40,10 @@ def delete_note(request, note_id):
     Note.objects.get(pk=note_id).delete()
     return redirect("/notes")   # redirect to url = url/notes
 
+
 # --Sites----------------------------------------------------------
 
-
+@never_cache
 @http.require_safe
 def sites_all(request, category_name=''):
     if not category_name or category_name == "All":
