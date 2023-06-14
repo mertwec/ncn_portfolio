@@ -107,17 +107,23 @@ NAME_DATABASE = os.getenv("DB_POSTGRES")
 
 LOCAL_DATABASE_URL = f"postgres://{USER_DATABASE}:{PASSWORD_DATABASE}@localhost/{NAME_DATABASE}"
 
-AWS_HOST = os.getenv("DB_HOST", 'localhost')
-AWS_PORT = os.getenv("DB_PORT", '5432')
+AWS_HOST = os.getenv("AWS_HOST", 'localhost')
+AWS_PORT = os.getenv("AWS_PORT", '5432')
 AWS_USERNAME = os.getenv("AWS_USERNAME")
 AWS_PASSWORD = os.getenv("AWS_PASSWORD")
 AWS_NAME_DATABASE = os.getenv("AWS_NAME_DATABASE")
 
 AWS_DATABASE_URL = f"postgres://{AWS_USERNAME}:{AWS_PASSWORD}@{AWS_HOST}:{AWS_PORT}/{AWS_NAME_DATABASE}"
 
+RENDER_DATABASE_URL = os.getenv("RENDER_DATABASE_URL")
 
 DATABASES = {
-    'default': dj_database_url.parse(os.getenv("DATABASE_URL", LOCAL_DATABASE_URL), conn_max_age=600)
+    'default': dj_database_url.parse(os.getenv(
+        "DATABASE_URL", 
+        LOCAL_DATABASE_URL
+        # RENDER_DATABASE_URL
+        ), 
+        conn_max_age=600)
 
     # {
     #     "ENGINE": "django.db.backends.postgresql",
