@@ -1,9 +1,8 @@
 import json
 import random
-import os.path
-
 
 path_to_json = r"../database/quotes.json"
+
 
 def get_json_data(path_):
     with open(path_, 'r') as json_object:
@@ -20,7 +19,7 @@ def add_quote_to_json(quote: str, author: str, path=path_to_json):
     print('complete')
 
 
-def random_quote(path = path_to_json):
+def random_quote(path=path_to_json):
     try:
         quotes = get_json_data(path)
         return random.choice(quotes)
@@ -28,7 +27,6 @@ def random_quote(path = path_to_json):
     except FileNotFoundError as fnfe:
         print(fnfe)
         return
-    
 
 
 if __name__ == '__main__':

@@ -1,6 +1,6 @@
-from notes.models import Category
 from ncn.components.quotes import random_quote
 from ncn.settings import DATABASES_QUOTER
+from notes.models import Category
 
 
 def categories_sites(request):

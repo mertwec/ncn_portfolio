@@ -1,0 +1,41 @@
+{% load static %}
+
+<div class="container-fluid">
+    <div style="text-indent: 16px;">
+        <h5>Used:</h5>
+        <table class="table">
+            <tr>
+                <th scope="row">Language</th>
+                <td>Python 3</td>
+            </tr>
+            <tr>
+                <th scope="row">Libraries</th>
+                <td>Threading, RPi.GPIO, serial, escpos</td>
+            </tr>
+            <tr>
+                <th scope="row">OS</th>
+                <td> Raspberry Pi OS Lite </td>
+            </tr>
+            <tr>
+                <th scope="row">Device</th>
+                <td><a href="https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/" target="_blank">Raspberry Pi Zero 2W</a></td>
+            </tr>
+        </table>
+        <h5>Description:</h5>
+        <p> Pandamat is an automated device designed for receiving and preprocessing plastic bottles with a capacity of up to 2 liters.
+            The primary process involves compressing the bottles using an integrated press, which reduces their volume for subsequent recycling.
+Upon completing the procedure, the device issues a receipt with a QR code containing information about the number of bottles received.</p>
+
+        <figure class="text-center">
+            <img src="{% static 'images/projects/pandamat-v1.png' %}" alt="the pandamat with press"
+                 width="500" class="img-fluid">
+            <figcaption>Pandamat: A Device for Receiving and Preprocessing Plastic Bottles</figcaption>
+        </figure>
+
+<!--        <figure class="text-center">-->
+<!--            <img src="{#% static 'images/projects/pandamat_v2.jpg' %#}" alt="panel of the pandamat with press" class="img-fluid">-->
+<!--            <figcaption>Panel of the pandamat</figcaption>-->
+<!--        </figure>-->
+
+    </div>
+</div>

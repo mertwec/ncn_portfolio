@@ -1,4 +1,5 @@
 from django.urls import path
+
 import notes.views as v_note
 
 app_name = 'notes'

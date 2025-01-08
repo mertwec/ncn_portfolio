@@ -8,3 +8,5 @@ static_conect
 cache_file
 temp.py
 sites.json
+
+log_mock_request.txt

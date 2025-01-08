@@ -13,9 +13,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 
+import dj_database_url
 import django.middleware.cache
 from dotenv import load_dotenv
-import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,9 +23,6 @@ PROJECT_DIR = BASE_DIR / 'ncn'
 
 # load var_environment
 load_dotenv(os.path.join(BASE_DIR, ".env"))
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv(
@@ -118,26 +115,26 @@ AWS_DATABASE_URL = f"postgres://{AWS_USERNAME}:{AWS_PASSWORD}@{AWS_HOST}:{AWS_PO
 RENDER_DATABASE_URL = os.getenv("RENDER_DATABASE_URL")
 
 DATABASES = {
-    'default': dj_database_url.parse(os.getenv(
-        "DATABASE_URL", 
-        LOCAL_DATABASE_URL
-        # RENDER_DATABASE_URL
-        ), 
-        conn_max_age=600)
+    # 'default':  dj_database_url.parse(os.getenv(
+    #     "DATABASE_URL",
+    #     LOCAL_DATABASE_URL
+    #     # RENDER_DATABASE_URL
+    #     ),
+    #     conn_max_age=600),
 
-    # {
+    # 'default':{
     #     "ENGINE": "django.db.backends.postgresql",
     #     "NAME": "ncn_portfolio_db",
     #     'USER': os.getenv("USER_POSTGRES", 'postgres'),
     #     'PASSWORD': os.getenv("PASSWORD_POSTGRES"),
     #     'HOST': 'localhost',
     #     'PORT': '',
-    # }
+    # },
 
-    # 'sqlite': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': PROJECT_DIR / 'database/crib_db.sqlite3',
-    # }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': PROJECT_DIR / 'database/crib_db.sqlite3',
+    }
 }
 
 DATABASES_QUOTER = os.path.join(PROJECT_DIR, "database", "quotes.json")

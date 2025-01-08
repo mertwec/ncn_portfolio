@@ -1,13 +1,12 @@
-## -My Portfolio-
+## - Portfolio -
+portfolio with my skills and examples of projects
 
-About me and my skills.
 
-deploy:  https://dashboard.render.com/
-remove database to AWS service (26.05.2023)
+deploy on:  https://dashboard.render.com/
 
 ----------------------------------------------------
 To get Admin access: login as administrator by url:
 
 `/user/login`
 
-* login and password see in environment params
+* login and password see in environment params of render.com

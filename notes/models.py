@@ -1,5 +1,6 @@
-from django.db import models, connection
 from datetime import datetime
+
+from django.db import connection, models
 
 
 class Note(models.Model):

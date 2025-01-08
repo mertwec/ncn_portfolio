@@ -1,16 +1,16 @@
 import json
 import os
 
-from django.shortcuts import render, redirect
-from django.views.decorators import http
-from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+from django.shortcuts import redirect, render
+from django.views.decorators import http
 from django.views.decorators.cache import never_cache
 
-from notes.models import Note, SiteNote, Category
-from notes.forms import NoteForm
 from ncn import settings
 from ncn.components.tools_view import paginate_object
+from notes.forms import NoteForm
+from notes.models import Category, Note, SiteNote
 
 
 # --Notes-----------------------------------------------------------

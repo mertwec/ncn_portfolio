@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from .models import Note
 
+
 class NoteForm(forms.ModelForm):    
     class Meta:
         model = Note

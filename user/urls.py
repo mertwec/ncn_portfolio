@@ -1,6 +1,6 @@
-from django.urls import path, include
-from user.view import LoginViewUser, LogoutViewUser
+from django.urls import include, path
 
+from user.view import LoginViewUser, LogoutViewUser
 
 urlpatterns = [
     path("login/", LoginViewUser.as_view(), name="login"),

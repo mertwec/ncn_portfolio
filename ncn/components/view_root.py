@@ -1,5 +1,5 @@
-from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
+from django.shortcuts import render
 
 
 def main(request: HttpRequest):
@@ -10,7 +10,7 @@ def resume(request: HttpRequest):
     return render(request, template_name="about_me/resume.html")   
 
 
-def mock_api(request):
+def mock_api(request: HttpRequest):
     """for update serwer render.com"""
-    return HttpResponse()
+    return HttpResponse(content="Ok")
     

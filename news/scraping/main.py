@@ -1,4 +1,5 @@
-from tools.scraping_tesmanian import ROOT_URL, parsing_request,get_news_tasmania
+from tools.scraping_tesmanian import (ROOT_URL, get_news_tasmania,
+                                      parsing_request)
 from tools.tool_requests import get_request
 
 

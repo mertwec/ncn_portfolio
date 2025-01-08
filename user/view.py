@@ -1,4 +1,5 @@
 from django.contrib.auth.views import LoginView, LogoutView
+
 from ncn.settings import LOGIN_REDIRECT_URL
 
 

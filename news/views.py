@@ -1,14 +1,17 @@
 from datetime import datetime, timedelta
-from django.shortcuts import render, redirect
-from django.urls import reverse
-from django.http import HttpRequest
-from django.views.decorators import cache, http
-from django.db import transaction
 
-from news.models import SourceNews, News
-from news.scraping.tools.scraping_tesmanian import ROOT_URL, parsing_request, get_news_tasmania
-from news.scraping.tools.tool_requests import get_request
+from django.db import transaction
+from django.http import HttpRequest
+from django.shortcuts import redirect, render
+from django.urls import reverse
+from django.views.decorators import cache, http
+
 from ncn.components.tools_view import paginate_object
+from news.models import News, SourceNews
+from news.scraping.tools.scraping_tesmanian import (ROOT_URL,
+                                                    get_news_tasmania,
+                                                    parsing_request)
+from news.scraping.tools.tool_requests import get_request
 
 
 @cache.never_cache

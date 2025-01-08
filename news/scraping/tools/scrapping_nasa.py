@@ -1,8 +1,9 @@
-from urllib.request import Request
-from bs4 import BeautifulSoup, ResultSet
-from typing import List, Optional
-import pydantic
 import pdb
+from typing import List, Optional
+from urllib.request import Request
+
+import pydantic
+from bs4 import BeautifulSoup, ResultSet
 
 
 class Image(pydantic.BaseModel):
